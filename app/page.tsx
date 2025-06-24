@@ -1,4 +1,4 @@
-import { ArrowRight, Users, CheckCircle, Phone, Mail, MapPin, Target, Zap, Calendar } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -302,22 +302,14 @@ export default function CifroLanding() {
               <Button
                 variant="outline"
                 size="lg"
-                className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-blue-600"
+                className="text-lg px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
               >
                 <Mail className="mr-2 w-5 h-5" />
                 Enviar Consulta
               </Button>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
-                  <Phone className="w-6 h-6" />
-                </div>
-                <h3 className="font-semibold mb-2">Teléfono</h3>
-                <p className="opacity-90">+54 11 XXXX-XXXX</p>
-              </div>
-
+            <div className="grid md:grid-cols-2 gap-8">
               <div className="flex flex-col items-center">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
                   <Mail className="w-6 h-6" />
