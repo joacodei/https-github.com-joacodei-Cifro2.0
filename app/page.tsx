@@ -1,4 +1,4 @@
-import { ArrowRight, Users, CheckCircle, Phone, Mail, MapPin, Target, Zap } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Phone, Mail, MapPin, Target, Zap, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -22,20 +22,24 @@ export default function CifroLanding() {
               />
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="#servicios" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="#servicios" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
                 Servicios
               </a>
-              <a href="#nosotros" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="#nosotros" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
                 Nosotros
               </a>
-              <a href="#por-que" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="#por-que" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
                 ¿Por qué CIFRO?
               </a>
-              <a href="#contacto" className="text-gray-600 hover:text-gray-900 transition-colors">
+              <a href="#contacto" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
                 Contacto
               </a>
             </nav>
-            <Button className="bg-blue-600 hover:bg-blue-700">Consulta Gratuita</Button>
+            <Button size="lg" className="text-lg px-8 py-3 bg-blue-600 hover:bg-blue-700" asChild>
+              <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
+                Consulta Gratuita
+              </a>
+            </Button>
           </div>
         </div>
       </header>
@@ -53,12 +57,14 @@ export default function CifroLanding() {
               convertimos en tu equipo financiero para que te enfoques en hacer crecer tu negocio.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-3 bg-blue-600 hover:bg-blue-700">
-                Reunión Sin Cargo
-                <ArrowRight className="ml-2 w-5 h-5" />
+              <Button size="lg" className="text-lg px-8 py-3 bg-blue-600 hover:bg-blue-700" asChild>
+                <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
+                  Reunión Sin Cargo
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-3">
-                Conoce Nuestros Servicios
+              <Button variant="outline" size="lg" className="text-lg px-8 py-3" asChild>
+                <a href="#servicios">Conoce Nuestros Servicios</a>
               </Button>
             </div>
             <p className="text-sm text-gray-500 mt-4">Sin compromiso • 100% confidencial</p>
@@ -67,7 +73,7 @@ export default function CifroLanding() {
       </section>
 
       {/* Services Section */}
-      <section className="w-full py-16 px-6 md:px-12 lg:px-24 bg-white">
+      <section id="servicios" className="w-full py-16 px-6 md:px-12 lg:px-24 bg-white">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Imagen izquierda */}
           <img
@@ -287,13 +293,15 @@ export default function CifroLanding() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" variant="secondary" className="text-lg px-8 py-3">
-                <Phone className="mr-2 w-5 h-5" />
-                Agendar Reunión
+              <Button size="lg" className="text-lg px-8 py-3 bg-blue-600 hover:bg-blue-700" asChild>
+                <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
+                  <Calendar className="mr-2 w-5 h-5" />
+                  Agendar Reunión
+                </a>
               </Button>
               <Button
-                size="lg"
                 variant="outline"
+                size="lg"
                 className="text-lg px-8 py-3 border-white text-white hover:bg-white hover:text-blue-600"
               >
                 <Mail className="mr-2 w-5 h-5" />
