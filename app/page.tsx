@@ -31,7 +31,7 @@ export default function CifroLanding() {
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       // Here you would integrate with your email service
-      console.log("Email data:", { name, email, message, to: "info@cifro.com.ar" })
+      console.log("Email data:", { name, email, message, to: "jdibarreta@gmail.com" })
 
       alert("¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.")
       setIsDialogOpen(false)
