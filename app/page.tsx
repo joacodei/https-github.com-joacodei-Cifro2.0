@@ -1,10 +1,50 @@
-import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Calendar } from "lucide-react"
+"use client"
+
+import type React from "react"
+
+import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Calendar, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
 import Image from "next/image"
+import { useState } from "react"
 
 export default function CifroLanding() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    const formData = new FormData(e.currentTarget)
+    const name = formData.get("name") as string
+    const email = formData.get("email") as string
+    const message = formData.get("message") as string
+
+    try {
+      // Simulate email sending (replace with actual email service)
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      // Here you would integrate with your email service
+      console.log("Email data:", { name, email, message, to: "info@cifro.com.ar" })
+
+      alert("¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.")
+      setIsDialogOpen(false)
+
+      // Reset form
+      ;(e.target as HTMLFormElement).reset()
+    } catch (error) {
+      alert("Error al enviar el mensaje. Por favor, intenta nuevamente.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -63,7 +103,7 @@ export default function CifroLanding() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-3" asChild>
+              <Button variant="outline" size="lg" className="text-lg px-8 py-3 bg-transparent" asChild>
                 <a href="#servicios">Conoce Nuestros Servicios</a>
               </Button>
             </div>
@@ -299,14 +339,68 @@ export default function CifroLanding() {
                   Agendar Reunión
                 </a>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-              >
-                <Mail className="mr-2 w-5 h-5" />
-                Enviar Consulta
-              </Button>
+
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="text-lg px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+                  >
+                    <Mail className="mr-2 w-5 h-5" />
+                    Enviar Consulta
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-center text-xl font-bold text-gray-900">Enviar Consulta</DialogTitle>
+                  </DialogHeader>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <Label htmlFor="name">Nombre completo</Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Tu nombre completo"
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="tu@email.com"
+                        className="mt-1"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="message">Mensaje</Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        required
+                        placeholder="Cuéntanos sobre tu empresa y cómo podemos ayudarte..."
+                        className="mt-1 min-h-[120px]"
+                      />
+                    </div>
+                    <Button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700">
+                      {isSubmitting ? (
+                        <>Enviando...</>
+                      ) : (
+                        <>
+                          <Send className="mr-2 w-4 h-4" />
+                          Enviar Mensaje
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </DialogContent>
+              </Dialog>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
