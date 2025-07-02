@@ -20,7 +20,7 @@ export async function sendEmail(formData: FormData) {
       },
       body: JSON.stringify({
         from: "onboarding@resend.dev", // Using Resend's test domain
-        to: ["info@cifro.com.ar"],
+        to: ["jdibarreta@gmail.com"],
         subject: `Nueva consulta de ${name} - CIFRO`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
