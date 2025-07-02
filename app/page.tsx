@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import Image from "next/image"
 import { useState } from "react"
+import { sendEmail } from "../actions/send-email"
 
 export default function CifroLanding() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -22,22 +23,18 @@ export default function CifroLanding() {
     setIsSubmitting(true)
 
     const formData = new FormData(e.currentTarget)
-    const name = formData.get("name") as string
-    const email = formData.get("email") as string
-    const message = formData.get("message") as string
 
     try {
-      // Simulate email sending (replace with actual email service)
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      const result = await sendEmail(formData)
 
-      // Here you would integrate with your email service
-      console.log("Email data:", { name, email, message, to: "jdibarreta@gmail.com" })
-
-      alert("¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.")
-      setIsDialogOpen(false)
-
-      // Reset form
-      ;(e.target as HTMLFormElement).reset()
+      if (result.success) {
+        alert("¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.")
+        setIsDialogOpen(false)
+        // Reset form
+        ;(e.target as HTMLFormElement).reset()
+      } else {
+        alert(result.error || "Error al enviar el mensaje. Por favor, intenta nuevamente.")
+      }
     } catch (error) {
       alert("Error al enviar el mensaje. Por favor, intenta nuevamente.")
     } finally {
