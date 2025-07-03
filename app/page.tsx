@@ -2,14 +2,10 @@
 
 import type React from "react"
 
-import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Calendar, Send } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
 import Image from "next/image"
 import { useState } from "react"
 import { sendEmail } from "../actions/send-email"
@@ -329,75 +325,13 @@ export default function CifroLanding() {
               <p className="opacity-90">Sin compromiso • 100% confidencial</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex justify-center mb-12">
               <Button size="lg" className="text-lg px-8 py-3 bg-white text-blue-600 hover:bg-blue-50" asChild>
                 <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
                   <Calendar className="mr-2 w-5 h-5" />
                   Agendar Reunión
                 </a>
               </Button>
-
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-lg px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-                  >
-                    <Mail className="mr-2 w-5 h-5" />
-                    Enviar Consulta
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="text-center text-xl font-bold text-gray-900">Enviar Consulta</DialogTitle>
-                  </DialogHeader>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <Label htmlFor="name">Nombre completo</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        placeholder="Tu nombre completo"
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="tu@email.com"
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="message">Mensaje</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        required
-                        placeholder="Cuéntanos sobre tu empresa y cómo podemos ayudarte..."
-                        className="mt-1 min-h-[120px]"
-                      />
-                    </div>
-                    <Button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700">
-                      {isSubmitting ? (
-                        <>Enviando...</>
-                      ) : (
-                        <>
-                          <Send className="mr-2 w-4 h-4" />
-                          Enviar Mensaje
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </DialogContent>
-              </Dialog>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
