@@ -12,17 +12,25 @@ export async function sendEmail(formData: FormData) {
     return { success: false, error: "Nombre, email y mensaje son requeridos" }
   }
 
+  // Check if API key is available
+  if (!process.env.RESEND_API_KEY) {
+    console.error("RESEND_API_KEY environment variable is not set")
+    return { success: false, error: "Configuración de email no disponible" }
+  }
+
   try {
+    console.log("Attempting to send email with data:", { name, email, company })
+
     // Using Resend email service
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY || "re_jpQcnxHs_41c6UBMPEAx5ocrsU2pAeGoi"}`,
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         from: "onboarding@resend.dev", // Using Resend's test domain
-        to: ["jdeibarreta@cifro.com"],
+        to: ["jdeibarreta@cifro.com.ar"],
         subject: `Nueva Consulta ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -52,8 +60,8 @@ export async function sendEmail(formData: FormData) {
 
     if (!response.ok) {
       const errorData = await response.text()
-      console.error("Resend API Error:", errorData)
-      throw new Error("Error al enviar el email")
+      console.error("Resend API Error:", response.status, errorData)
+      throw new Error(`Error al enviar el email: ${response.status}`)
     }
 
     const result = await response.json()

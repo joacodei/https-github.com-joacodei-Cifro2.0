@@ -33,6 +33,7 @@ export default function CifroLanding() {
         alert(result.error || "Error al enviar el mensaje. Por favor, intenta nuevamente.")
       }
     } catch (error) {
+      console.error("Form submission error:", error)
       alert("Error al enviar el mensaje. Por favor, intenta nuevamente.")
     } finally {
       setIsSubmitting(false)
@@ -428,17 +429,6 @@ export default function CifroLanding() {
                     placeholder="Cuéntanos sobre tu empresa y cómo podemos ayudarte..."
                     className="mt-1 min-h-[120px] border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                   />
-                </div>
-
-                {/* Simple captcha placeholder */}
-                <div className="bg-gray-50 border border-gray-200 rounded p-4 flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <input type="checkbox" id="captcha" className="rounded" />
-                    <label htmlFor="captcha" className="text-sm text-gray-600">
-                      No soy un robot
-                    </label>
-                  </div>
-                  <div className="text-xs text-gray-400">reCAPTCHA</div>
                 </div>
 
                 <Button
