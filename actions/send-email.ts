@@ -21,7 +21,7 @@ export async function sendEmail(formData: FormData) {
       body: JSON.stringify({
         from: "onboarding@resend.dev", // Using Resend's test domain
         to: ["jdeibarreta@cifro.com.ar"],
-        subject: `Nueva consulta de ${name} - CIFRO`,
+        subject: `Nueva Consulta ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <div style="background-color: #2563eb; color: white; padding: 20px; text-align: center;">
