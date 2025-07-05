@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Phone } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -309,7 +309,20 @@ export default function CifroLanding() {
         </div>
       </section>
 
-      {/* New Contact Form Section */}
+      {/* Blue Contact Introduction Section - Now above the contact form */}
+      <section id="contacto" className="py-20 bg-blue-600 text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">¡Contáctanos!</h2>
+            <p className="text-xl mb-8 opacity-90">
+              Te proponemos una primera reunión sin cargo para conocerte, entender tus desafíos y ver cómo podemos
+              ayudarte.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
       <section id="contacto-form" className="py-0 bg-slate-900">
         <div className="grid lg:grid-cols-2 min-h-[600px]">
           {/* Left Side - Business Information */}
@@ -436,51 +449,6 @@ export default function CifroLanding() {
                   {isSubmitting ? "ENVIANDO..." : "ENVIAR"}
                 </Button>
               </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Original Contact Section - Now simplified */}
-      <section id="contacto" className="py-20 bg-blue-600 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">¡Contáctanos!</h2>
-            <p className="text-xl mb-8 opacity-90">
-              Te proponemos una primera reunión sin cargo para conocerte, entender tus desafíos y ver cómo podemos
-              ayudarte.
-            </p>
-
-            <div className="bg-white/10 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
-              <p className="text-lg font-semibold mb-2">Primera Consulta Gratuita</p>
-              <p className="opacity-90">Sin compromiso • 100% confidencial</p>
-            </div>
-
-            <div className="flex justify-center mb-12">
-              <Button size="lg" className="text-lg px-8 py-3 bg-white text-blue-600 hover:bg-blue-50" asChild>
-                <a href="#contacto-form">
-                  <Phone className="mr-2 w-5 h-5" />
-                  Agendar Consulta
-                </a>
-              </Button>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <h3 className="font-semibold mb-2">Email</h3>
-                <p className="opacity-90">info@cifro.com.ar</p>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <h3 className="font-semibold mb-2">Ubicación</h3>
-                <p className="opacity-90">Buenos Aires, Argentina</p>
-              </div>
             </div>
           </div>
         </div>
