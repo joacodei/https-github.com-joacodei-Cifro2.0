@@ -2,12 +2,14 @@
 
 export async function sendEmail(formData: FormData) {
   const name = formData.get("name") as string
+  const phone = formData.get("phone") as string
   const email = formData.get("email") as string
+  const company = formData.get("company") as string
   const message = formData.get("message") as string
 
   // Basic validation
   if (!name || !email || !message) {
-    return { success: false, error: "Todos los campos son requeridos" }
+    return { success: false, error: "Nombre, email y mensaje son requeridos" }
   }
 
   try {
@@ -20,7 +22,7 @@ export async function sendEmail(formData: FormData) {
       },
       body: JSON.stringify({
         from: "onboarding@resend.dev", // Using Resend's test domain
-        to: ["jdeibarreta@cifro.com.ar"],
+        to: ["jdeibarreta@cifro.com"],
         subject: `Nueva Consulta ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -30,7 +32,9 @@ export async function sendEmail(formData: FormData) {
             <div style="padding: 20px; background-color: #f8fafc;">
               <h2 style="color: #1e40af;">Detalles del Contacto</h2>
               <p><strong>Nombre:</strong> ${name}</p>
+              <p><strong>Teléfono:</strong> ${phone || "No proporcionado"}</p>
               <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Empresa:</strong> ${company || "No proporcionado"}</p>
               <h3 style="color: #1e40af;">Mensaje:</h3>
               <div style="background-color: white; padding: 15px; border-left: 4px solid #2563eb; margin: 10px 0;">
                 ${message.replace(/\n/g, "<br>")}

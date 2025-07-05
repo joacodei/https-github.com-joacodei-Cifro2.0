@@ -2,11 +2,10 @@
 
 import type React from "react"
 
-import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Calendar, Send } from "lucide-react"
+import { ArrowRight, Users, CheckCircle, Mail, MapPin, Target, Zap, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -16,7 +15,6 @@ import { sendEmail } from "../actions/send-email"
 
 export default function CifroLanding() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -29,7 +27,6 @@ export default function CifroLanding() {
 
       if (result.success) {
         alert("¡Mensaje enviado exitosamente! Nos pondremos en contacto contigo pronto.")
-        setIsDialogOpen(false)
         // Reset form
         ;(e.target as HTMLFormElement).reset()
       } else {
@@ -68,14 +65,12 @@ export default function CifroLanding() {
               <a href="#por-que" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
                 ¿Por qué CIFRO?
               </a>
-              <a href="#contacto" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
+              <a href="#contacto-form" className="text-gray-600 hover:text-gray-900 transition-colors scroll-smooth">
                 Contacto
               </a>
             </nav>
             <Button size="lg" className="text-lg px-8 py-3 bg-blue-600 hover:bg-blue-700" asChild>
-              <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
-                Consulta Gratuita
-              </a>
+              <a href="#contacto-form">Solicitar Información</a>
             </Button>
           </div>
         </div>
@@ -95,7 +90,7 @@ export default function CifroLanding() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="text-lg px-8 py-3 bg-blue-600 hover:bg-blue-700" asChild>
-                <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
+                <a href="#contacto-form">
                   Reunión Sin Cargo
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
@@ -314,7 +309,139 @@ export default function CifroLanding() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* New Contact Form Section */}
+      <section id="contacto-form" className="py-0 bg-slate-900">
+        <div className="grid lg:grid-cols-2 min-h-[600px]">
+          {/* Left Side - Business Information */}
+          <div className="bg-slate-900 text-white p-8 lg:p-12 flex flex-col justify-center">
+            <div className="max-w-lg">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+                ¿Listo para transformar las finanzas de tu empresa?
+              </h2>
+              <p className="text-lg text-gray-300 mb-8">
+                Reserva una consulta gratuita y descubre cómo podemos ayudarte a optimizar la gestión financiera de tu
+                PyME. Tenemos una <span className="text-blue-400 font-semibold">solución de finanzas tercerizada</span>{" "}
+                para ayudar a las empresas a escalar sus operaciones de manera efectiva.
+              </p>
+
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-4 h-4 text-white" />
+                  </div>
+                  <span className="text-gray-300">info@cifro.com.ar</span>
+                </div>
+              </div>
+
+              {/* Map placeholder */}
+              <div className="mt-8 bg-gray-800 rounded-lg p-4 h-48 flex items-center justify-center">
+                <div className="text-center text-gray-400">
+                  <MapPin className="w-12 h-12 mx-auto mb-2" />
+                  <p>Mapa de ubicación</p>
+                  <p className="text-sm">Buenos Aires, Argentina</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Contact Form */}
+          <div className="bg-white p-8 lg:p-12 flex flex-col justify-center">
+            <div className="max-w-md mx-auto w-full">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Reserva una consulta</h3>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="name" className="text-gray-700">
+                    Nombre
+                  </Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Tu nombre completo"
+                    className="mt-1 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="phone" className="text-gray-700">
+                    Teléfono
+                  </Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="Tu número de teléfono"
+                    className="mt-1 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="email" className="text-gray-700">
+                    E-mail
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="tu@email.com"
+                    className="mt-1 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="company" className="text-gray-700">
+                    Nombre de Empresa
+                  </Label>
+                  <Input
+                    id="company"
+                    name="company"
+                    type="text"
+                    placeholder="Nombre de tu empresa"
+                    className="mt-1 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="message" className="text-gray-700">
+                    Contanos tu caso
+                  </Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    required
+                    placeholder="Cuéntanos sobre tu empresa y cómo podemos ayudarte..."
+                    className="mt-1 min-h-[120px] border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  />
+                </div>
+
+                {/* Simple captcha placeholder */}
+                <div className="bg-gray-50 border border-gray-200 rounded p-4 flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <input type="checkbox" id="captcha" className="rounded" />
+                    <label htmlFor="captcha" className="text-sm text-gray-600">
+                      No soy un robot
+                    </label>
+                  </div>
+                  <div className="text-xs text-gray-400">reCAPTCHA</div>
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3 text-lg font-semibold"
+                >
+                  {isSubmitting ? "ENVIANDO..." : "ENVIAR"}
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Original Contact Section - Now simplified */}
       <section id="contacto" className="py-20 bg-blue-600 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
@@ -329,75 +456,13 @@ export default function CifroLanding() {
               <p className="opacity-90">Sin compromiso • 100% confidencial</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <div className="flex justify-center mb-12">
               <Button size="lg" className="text-lg px-8 py-3 bg-white text-blue-600 hover:bg-blue-50" asChild>
-                <a href="https://calendly.com/cifro-info/30min" target="_blank" rel="noopener noreferrer">
-                  <Calendar className="mr-2 w-5 h-5" />
-                  Agendar Reunión
+                <a href="#contacto-form">
+                  <Phone className="mr-2 w-5 h-5" />
+                  Agendar Consulta
                 </a>
               </Button>
-
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-lg px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-                  >
-                    <Mail className="mr-2 w-5 h-5" />
-                    Enviar Consulta
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle className="text-center text-xl font-bold text-gray-900">Enviar Consulta</DialogTitle>
-                  </DialogHeader>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <Label htmlFor="name">Nombre completo</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        placeholder="Tu nombre completo"
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        placeholder="tu@email.com"
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="message">Mensaje</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        required
-                        placeholder="Cuéntanos sobre tu empresa y cómo podemos ayudarte..."
-                        className="mt-1 min-h-[120px]"
-                      />
-                    </div>
-                    <Button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700">
-                      {isSubmitting ? (
-                        <>Enviando...</>
-                      ) : (
-                        <>
-                          <Send className="mr-2 w-4 h-4" />
-                          Enviar Mensaje
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </DialogContent>
-              </Dialog>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
